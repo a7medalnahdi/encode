@@ -1,0 +1,409 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated to match reference design colors */
+  --encode-dark-blue: #010c1a;
+  --encode-gold: #e79a63;
+  --encode-white: #ffffff;
+  --encode-light-bg: #f5f7fa;
+
+  /* Restored original light mode colors */
+  --background: var(--encode-light-bg);
+  --foreground: var(--encode-dark-blue);
+  --card: var(--encode-white);
+  --card-foreground: var(--encode-dark-blue);
+  --popover: var(--encode-white);
+  --popover-foreground: var(--encode-dark-blue);
+  --primary: var(--encode-dark-blue);
+  --primary-foreground: var(--encode-white);
+  --secondary: var(--encode-gold);
+  --secondary-foreground: var(--encode-dark-blue);
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: var(--encode-gold);
+  --accent-foreground: var(--encode-dark-blue);
+  --destructive: #ef4444;
+  --destructive-foreground: var(--encode-white);
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: var(--encode-gold);
+  --chart-1: var(--encode-gold);
+  --chart-2: var(--encode-dark-blue);
+  --chart-3: #8b5cf6;
+  --chart-4: #06b6d4;
+  --chart-5: #84cc16;
+  --radius: 0.625rem;
+  --sidebar: var(--encode-white);
+  --sidebar-foreground: var(--encode-dark-blue);
+  --sidebar-primary: var(--encode-dark-blue);
+  --sidebar-primary-foreground: var(--encode-white);
+  --sidebar-accent: var(--encode-gold);
+  --sidebar-accent-foreground: var(--encode-dark-blue);
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: var(--encode-gold);
+  --font-ibm-arabic: "IBM Plex Sans Arabic", sans-serif;
+}
+
+.dark {
+  /* Updated dark mode to match reference design */
+  --background: var(--encode-dark-blue);
+  --foreground: var(--encode-white);
+  --card: #0f172a;
+  --card-foreground: var(--encode-white);
+  --popover: #0f172a;
+  --popover-foreground: var(--encode-white);
+  --primary: var(--encode-gold);
+  --primary-foreground: var(--encode-dark-blue);
+  --secondary: #1e293b;
+  --secondary-foreground: var(--encode-white);
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: var(--encode-gold);
+  --accent-foreground: var(--encode-dark-blue);
+  --destructive: #ef4444;
+  --destructive-foreground: var(--encode-white);
+  --border: #334155;
+  --input: #334155;
+  --ring: var(--encode-gold);
+  --chart-1: var(--encode-gold);
+  --chart-2: var(--encode-white);
+  --chart-3: #8b5cf6;
+  --chart-4: #06b6d4;
+  --chart-5: #84cc16;
+  --sidebar: var(--encode-dark-blue);
+  --sidebar-foreground: var(--encode-white);
+  --sidebar-primary: var(--encode-gold);
+  --sidebar-primary-foreground: var(--encode-dark-blue);
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: var(--encode-white);
+  --sidebar-border: #334155;
+  --sidebar-ring: var(--encode-gold);
+}
+
+@theme inline {
+  /* Updated font variables to use IBM Plex Sans Arabic */
+  --font-arabic: var(--font-ibm-arabic);
+  --font-english: var(--font-ibm-arabic);
+  --font-sans: var(--font-ibm-arabic);
+  --font-mono: var(--font-ibm-arabic);
+
+  /* All other variables remain unchanged */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Enhanced RTL/LTR support and font switching */
+  html[lang="ar"] body {
+    font-family: var(--font-arabic);
+    direction: rtl;
+  }
+
+  html[lang="en"] body {
+    font-family: var(--font-english);
+    direction: ltr;
+  }
+
+  [dir="rtl"] {
+    text-align: right;
+  }
+
+  [dir="ltr"] {
+    text-align: left;
+  }
+
+  /* Added smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced transitions for theme switching */
+  .transition-theme {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+  }
+}
+
+/* Updated Encode brand utilities with new colors */
+.text-encode-gold {
+  color: var(--encode-gold);
+}
+
+.bg-encode-gold {
+  background-color: var(--encode-gold);
+}
+
+.text-encode-dark-blue {
+  color: var(--encode-dark-blue);
+}
+
+.bg-encode-dark-blue {
+  background-color: var(--encode-dark-blue);
+}
+
+.border-encode-gold {
+  border-color: var(--encode-gold);
+}
+
+/* Added new utility classes for animations and effects */
+.card-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(231, 154, 99, 0.2),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card-glow:hover::before {
+  opacity: 1;
+}
+
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::before {
+  content: "";
+  position: absolute;
+  top: var(--y, 50%);
+  left: var(--x, 50%);
+  transform: translate(-50%, -50%) scale(0);
+  background: rgba(255, 255, 255, 0.2);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  transition: transform 0.5s ease;
+  opacity: 0.2;
+}
+
+.btn-ripple:hover::before {
+  transform: translate(-50%, -50%) scale(2.5);
+}
+
+/* Added animation keyframes for scroll effects */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes infiniteScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-200px * 7));
+  }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+.animate-infinite-scroll {
+  animation: infiniteScroll 40s linear infinite;
+}
+
+/* Added perspective and 3D transform utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-3d {
+  transform-style: preserve-3d;
+}
+
+@layer utilities {
+  @keyframes aurora-blob {
+    0%,
+    100% {
+      transform: translateY(0) translateX(0) scale(1);
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px) scale(1.05);
+    }
+    50% {
+      transform: translateY(10px) translateX(-20px) scale(0.95);
+    }
+    75% {
+      transform: translateY(-10px) translateX(20px) scale(1);
+    }
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-aurora-blob {
+    animation: aurora-blob 20s infinite ease-in-out;
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s both;
+  }
+}
+
+@layer utilities {
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.33);
+      opacity: 1;
+    }
+    80%,
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes breathing-light {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.2;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  }
+  .animate-breathing-light {
+    animation: breathing-light 8s infinite ease-in-out;
+  }
+  .animate-fade-in {
+    animation: fade-in 1s both;
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* The magic for the mouse-aware glow effect */
+  .card-glow::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit; /* Use the parent's border-radius */
+    background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), hsl(var(--accent) / 0.15), transparent 20%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .card-glow:hover::before {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  @keyframes infinite-scroll-ltr {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes infinite-scroll-rtl {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-infinite-scroll-ltr {
+    animation: infinite-scroll-ltr 50s linear infinite;
+  }
+  .animate-infinite-scroll-rtl {
+    animation: infinite-scroll-rtl 50s linear infinite;
+  }
+  .pause-on-hover:hover {
+    animation-play-state: paused;
+  }
+}
