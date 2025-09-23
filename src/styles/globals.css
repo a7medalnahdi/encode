@@ -1,0 +1,248 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  /* Light Mode - Day Theme */
+  --background: #ffffff;
+  --foreground: #00203f;
+  --card: #ffffff;
+  --card-foreground: #00203f;
+  --popover: #ffffff;
+  --popover-foreground: #00203f;
+  --primary: #00203f;
+  --primary-foreground: #ffffff;
+  --secondary: #f8f9fa;
+  --secondary-foreground: #00203f;
+  --muted: #f1f3f4;
+  --muted-foreground: #6c757d;
+  --accent: #e79a63;
+  --accent-foreground: #ffffff;
+  --destructive: #dc3545;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 32, 63, 0.1);
+  --input: transparent;
+  --input-background: #f8f9fa;
+  --switch-background: #dee2e6;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: rgba(0, 32, 63, 0.2);
+  --radius: 0.625rem;
+  
+  /* Encode Brand Colors */
+  --encode-navy: #00203f;
+  --encode-orange: #e79a63;
+  --encode-white: #ffffff;
+  --encode-gray: #6c757d;
+}
+
+.dark {
+  /* Dark Mode - Night Theme */
+  --background: #00203f;
+  --foreground: #ffffff;
+  --card: #003366;
+  --card-foreground: #ffffff;
+  --popover: #003366;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #00203f;
+  --secondary: #1a2332;
+  --secondary-foreground: #ffffff;
+  --muted: #1a2332;
+  --muted-foreground: #a8b3c1;
+  --accent: #e79a63;
+  --accent-foreground: #ffffff;
+  --destructive: #dc3545;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: #1a2332;
+  --ring: rgba(231, 154, 99, 0.3);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius: var(--radius);
+  
+  /* Text size variables */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: system-ui, -apple-system, sans-serif;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-x: hidden;
+    direction: rtl;
+    text-align: right;
+  }
+  
+  /* Smooth theme transitions for all elements */
+  html {
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    direction: rtl;
+  }
+  
+  * {
+    transition: border-color 0.3s ease, 
+                background-color 0.3s ease, 
+                color 0.3s ease,
+                box-shadow 0.3s ease;
+  }
+  
+  /* Enhanced scrollbar styling with theme awareness */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+    border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 6px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid var(--background);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--accent);
+  }
+  
+  /* Firefox scrollbar styling */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--background);
+  }
+  
+  /* Commonly used utilities */
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  /* Fix for form inputs and placeholders in RTL */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    text-align: right;
+    direction: rtl;
+  }
+  
+  input[type="text"]::placeholder,
+  input[type="email"]::placeholder,
+  textarea::placeholder {
+    text-align: right;
+    direction: rtl;
+  }
+  
+
+  
+  /* Ensure proper alignment for Arabic text */
+  h1, h2, h3, h4, h5, h6 {
+    text-align: inherit;
+  }
+  
+  p {
+    text-align: inherit;
+  }
+
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
